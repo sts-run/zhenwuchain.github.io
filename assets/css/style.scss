@@ -2,3 +2,32 @@
 ---
 
 @import "{{ site.theme }}";
+
+
+#banner {
+    display: none;
+}
+
+body {
+
+    background: #222;
+}
+header{
+    background: #000;
+}
+
+section {
+    width: 800px;
+}
+
+nav ul li.tag-h1 a {
+    font-weight: bold;
+    color: #fff;
+}
+
+nav ul a {
+    color: #aaa;
+}
+nav ul a:hover {
+    color: #aaa;
+}
