@@ -65,7 +65,7 @@ Host: `https://wowexchange.xyz/gateway-api/`
 **Response**:
 
 
-| Parameter name | Description | 类型 | schema |
+| Parameter name | Description | Data Type | schema |
 | -------- | -------- | ----- |----- | 
 |code||integer(int32)|integer(int32)|
 |msg||string||
@@ -117,7 +117,7 @@ not available
 **Response**:
 
 
-| Parameter name | Description | 类型 | schema |
+| Parameter name | Description | Data Type | schema |
 | -------- | -------- | ----- |----- | 
 |code||integer(int32)|integer(int32)|
 |msg||string||
@@ -171,7 +171,7 @@ not available
 **Response**:
 
 
-| Parameter name | Description | 类型 | schema |
+| Parameter name | Description | Data Type | schema |
 | -------- | -------- | ----- |----- | 
 |code||integer(int32)|integer(int32)|
 |msg||string||
@@ -226,7 +226,7 @@ not available
 **Response**:
 
 
-| Parameter name | Description | 类型 | schema |
+| Parameter name | Description | Data Type | schema |
 | -------- | -------- | ----- |----- | 
 |code||integer(int32)|integer(int32)|
 |msg||string||
@@ -281,7 +281,7 @@ not available
 **Response**:
 
 
-| Parameter name | Description | 类型 | schema |
+| Parameter name | Description | Data Type | schema |
 | -------- | -------- | ----- |----- | 
 |code||integer(int32)|integer(int32)|
 |msg||string||
@@ -336,7 +336,7 @@ not available
 **Response**:
 
 
-| Parameter name | Description | 类型 | schema |
+| Parameter name | Description | Data Type | schema |
 | -------- | -------- | ----- |----- | 
 |code||integer(int32)|integer(int32)|
 |msg||string||
