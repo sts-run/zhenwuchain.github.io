@@ -1,26 +1,31 @@
 
 # Open-API
 
+[中文文档](./README_zh.html),  [English API doc](./)
+
+## General Info
+Host: `https://wowexchange.xyz/gateway-api/`
 
 ## Order
 
 
-**接口地址**:`/spot/open-api/v1/exchange/order`
+**Address**: `/spot/open-api/v1/exchange/order`
 
 
-**请求方式**:`POST`
+**Method**: `POST`
 
 
-**请求数据类型**:`application/x-www-form-urlencoded,application/json`
+
+**Request Content-Type**: `application/json`
 
 
-**响应数据类型**:`*/*`
+**Response Content-Type**: `application/json`
 
 
-**接口描述**:
+**Description**:
 
 
-**请求示例**:
+**Request Demo**:
 
 
 ```javascript
@@ -35,10 +40,10 @@
 ```
 
 
-**请求参数**:
+**Request Parameters**:
 
 
-| 参数名称 | 参数说明 | 请求类型    | 是否必须 | 数据类型 | schema |
+| Parameter name | Description | Type    | Required | Data Type | schema |
 | -------- | -------- | ----- | -------- | -------- | ------ |
 |orderRequestDTO|Order request param|body|true|OrderRequestDTO|OrderRequestDTO|
 |&emsp;&emsp;type|Order type,可用值:MARKET_PRICE,LIMIT_PRICE||true|string||
@@ -49,25 +54,25 @@
 |&emsp;&emsp;useDiscount|Whether to use the discount,0:don't use; 1:use||true|integer(int32)||
 
 
-**响应状态**:
+**Response status**:
 
 
-| 状态码 | 说明 | schema |
+| code | Description | schema |
 | -------- | -------- | ----- | 
-|200|OK|CommonResultBigDecimal|
+|200|OK| |
 
 
-**响应参数**:
+**Response**:
 
 
-| 参数名称 | 参数说明 | 类型 | schema |
+| Parameter name | Description | 类型 | schema |
 | -------- | -------- | ----- |----- | 
 |code||integer(int32)|integer(int32)|
 |msg||string||
 |data||number||
 
 
-**响应示例**:
+**Response Demo**:
 ```javascript
 {
 	"code": 0,
@@ -80,46 +85,46 @@
 ## Wallet Account
 
 
-**接口地址**:`/spot/open-api/v1/wallets`
+**Address**: `/spot/open-api/v1/wallets`
 
 
-**请求方式**:`GET`
+**Method**: `GET`
 
 
-**请求数据类型**:`application/x-www-form-urlencoded`
+**Request Content-Type**: `application/x-www-form-urlencoded`
 
 
-**响应数据类型**:`*/*`
+**Response Content-Type**: `application/json`
 
 
-**接口描述**:
+**Description**:
 
 
-**请求参数**:
+**Request Parameters**:
 
 
-暂无
+not available
 
 
-**响应状态**:
+**Response status**:
 
 
-| 状态码 | 说明 | schema |
+| Code | Description | schema |
 | -------- | -------- | ----- | 
-|200|OK|CommonResultBigDecimal|
+|200|OK| |
 
 
-**响应参数**:
+**Response**:
 
 
-| 参数名称 | 参数说明 | 类型 | schema |
+| Parameter name | Description | 类型 | schema |
 | -------- | -------- | ----- |----- | 
 |code||integer(int32)|integer(int32)|
 |msg||string||
 |data||number||
 
 
-**响应示例**:
+**Response Demo**:
 ```javascript
 {
 	"code": 0,
@@ -132,48 +137,48 @@
 ## Get the symbol latest prices
 
 
-**接口地址**:`/spot/open-api/v1/last-price/{symbol}`
+**Address**: `/spot/open-api/v1/last-price/{symbol}`
 
 
-**请求方式**:`GET`
+**Method**: `GET`
 
 
-**请求数据类型**:`application/x-www-form-urlencoded`
+**Request Content-Type**: `application/x-www-form-urlencoded`
 
 
-**响应数据类型**:`*/*`
+**Response Content-Type**: `application/json`
 
 
-**接口描述**:
+**Description**:
 
 
-**请求参数**:
+**Request Parameters**:
 
 
-| 参数名称 | 参数说明 | 请求类型    | 是否必须 | 数据类型 | schema |
+| Parameter name | Description | Type    | Required | Data Type | schema |
 | -------- | -------- | ----- | -------- | -------- | ------ |
 |symbol|symbol. format：BTC-USDT|path|true|string||
 
 
-**响应状态**:
+**Response status**:
 
 
-| 状态码 | 说明 | schema |
+| code | Description | schema |
 | -------- | -------- | ----- | 
-|200|OK|CommonResultBigDecimal|
+|200|OK| |
 
 
-**响应参数**:
+**Response**:
 
 
-| 参数名称 | 参数说明 | 类型 | schema |
+| Parameter name | Description | 类型 | schema |
 | -------- | -------- | ----- |----- | 
 |code||integer(int32)|integer(int32)|
 |msg||string||
 |data||number||
 
 
-**响应示例**:
+**Response Demo**:
 ```javascript
 {
 	"code": 0,
@@ -186,49 +191,49 @@
 ## Get real-time K-line data
 
 
-**接口地址**:`/spot/open-api/v1/k-line/{symbol}/{interval}`
+**Address**: `/spot/open-api/v1/k-line/{symbol}/{interval}`
 
 
-**请求方式**:`GET`
+**Method**: `GET`
 
 
-**请求数据类型**:`application/x-www-form-urlencoded`
+**Request Content-Type**: `application/x-www-form-urlencoded`
 
 
-**响应数据类型**:`*/*`
+**Response Content-Type**: `application/json`
 
 
-**接口描述**:
+**Description**:
 
 
-**请求参数**:
+**Request Parameters**:
 
 
-| 参数名称 | 参数说明 | 请求类型    | 是否必须 | 数据类型 | schema |
+| Parameter name | Description | Type    | Required | Data Type | schema |
 | -------- | -------- | ----- | -------- | -------- | ------ |
 |symbol|symbol. format：BTC-USDT|path|true|string||
 |interval|K-line interval, available: M1,M5,M15,M30,H1,H4,D1,W1,MON1|path|true|string||
 
 
-**响应状态**:
+**Response status**:
 
 
-| 状态码 | 说明 | schema |
+| code | Description | schema |
 | -------- | -------- | ----- | 
 |200|OK|CommonResultObject|
 
 
-**响应参数**:
+**Response**:
 
 
-| 参数名称 | 参数说明 | 类型 | schema |
+| Parameter name | Description | 类型 | schema |
 | -------- | -------- | ----- |----- | 
 |code||integer(int32)|integer(int32)|
 |msg||string||
 |data||object||
 
 
-**响应示例**:
+**Response Demo**:
 ```javascript
 {
 	"code": 0,
@@ -241,49 +246,49 @@
 ## Recent Trades
 
 
-**接口地址**:`/spot/open-api/v1/exchange/{symbol}/recent-trades`
+**Address**: `/spot/open-api/v1/exchange/{symbol}/recent-trades`
 
 
-**请求方式**:`GET`
+**Method**: `GET`
 
 
-**请求数据类型**:`application/x-www-form-urlencoded`
+**Request Content-Type**: `application/x-www-form-urlencoded`
 
 
-**响应数据类型**:`*/*`
+**Response Content-Type**: `application/json`
 
 
-**接口描述**:
+**Description**:
 
 
-**请求参数**:
+**Request Parameters**:
 
 
-| 参数名称 | 参数说明 | 请求类型    | 是否必须 | 数据类型 | schema |
+| Parameter name | Description | Type    | Required | Data Type | schema |
 | -------- | -------- | ----- | -------- | -------- | ------ |
 |symbol|symbol. format：BTC-USDT|path|true|string||
 |count|Number of result records|query|true|integer(int32)||
 
 
-**响应状态**:
+**Response status**:
 
 
-| 状态码 | 说明 | schema |
+| code | Description | schema |
 | -------- | -------- | ----- | 
-|200|OK|CommonResultBigDecimal|
+|200|OK| |
 
 
-**响应参数**:
+**Response**:
 
 
-| 参数名称 | 参数说明 | 类型 | schema |
+| Parameter name | Description | 类型 | schema |
 | -------- | -------- | ----- |----- | 
 |code||integer(int32)|integer(int32)|
 |msg||string||
 |data||number||
 
 
-**响应示例**:
+**Response Demo**:
 ```javascript
 {
 	"code": 0,
@@ -296,49 +301,49 @@
 ## Realtime Partial Book Depth
 
 
-**接口地址**:`/spot/open-api/v1/exchange/{symbol}/partial`
+**Address**: `/spot/open-api/v1/exchange/{symbol}/partial`
 
 
-**请求方式**:`GET`
+**Method**: `GET`
 
 
-**请求数据类型**:`application/x-www-form-urlencoded`
+**Request Content-Type**: `application/x-www-form-urlencoded`
 
 
-**响应数据类型**:`*/*`
+**Response Content-Type**: `application/json`
 
 
-**接口描述**:
+**Description**:
 
 
-**请求参数**:
+**Request Parameters**:
 
 
-| 参数名称 | 参数说明 | 请求类型    | 是否必须 | 数据类型 | schema |
+| Parameter name | Description | Type    | Required | Data Type | schema |
 | -------- | -------- | ----- | -------- | -------- | ------ |
 |symbol|symbol. format：BTC-USDT|path|true|string||
 |depth|Count of depth|query|true|integer(int32)||
 
 
-**响应状态**:
+**Response status**:
 
 
-| 状态码 | 说明 | schema |
+| code | Description | schema |
 | -------- | -------- | ----- | 
-|200|OK|CommonResultBigDecimal|
+|200|OK| |
 
 
-**响应参数**:
+**Response**:
 
 
-| 参数名称 | 参数说明 | 类型 | schema |
+| Parameter name | Description | 类型 | schema |
 | -------- | -------- | ----- |----- | 
 |code||integer(int32)|integer(int32)|
 |msg||string||
 |data||number||
 
 
-**响应示例**:
+**Response Demo**:
 ```javascript
 {
 	"code": 0,

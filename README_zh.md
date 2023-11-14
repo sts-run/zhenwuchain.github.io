@@ -1,20 +1,26 @@
 
 # Open-API
 
+[中文文档](./README_zh.html),  [English API doc](./)
 
-## Order
-
-
-**接口地址**:`/spot/open-api/v1/exchange/order`
-
-
-**请求方式**:`POST`
+## General Info
+Host: `https://wowexchange.xyz/gateway-api/`
 
 
-**请求数据类型**:`application/x-www-form-urlencoded,application/json`
+
+## 现货下单接口
 
 
-**响应数据类型**:`*/*`
+**接口地址**: `/spot/open-api/v1/exchange/order`
+
+
+**请求方式**: `POST`
+
+
+**请求数据类型**: `application/json`
+
+
+**响应数据类型**: `application/json`
 
 
 **接口描述**:
@@ -40,13 +46,13 @@
 
 | 参数名称 | 参数说明 | 请求类型    | 是否必须 | 数据类型 | schema |
 | -------- | -------- | ----- | -------- | -------- | ------ |
-|orderRequestDTO|Order request param|body|true|OrderRequestDTO|OrderRequestDTO|
-|&emsp;&emsp;type|Order type,可用值:MARKET_PRICE,LIMIT_PRICE||true|string||
-|&emsp;&emsp;amount|Buy or sell amount||true|number||
-|&emsp;&emsp;symbol|symbol. format：BTC-USDT||true|string||
-|&emsp;&emsp;direction|Order direction,可用值:BUY,SELL||true|string||
-|&emsp;&emsp;price|price||true|number||
-|&emsp;&emsp;useDiscount|Whether to use the discount,0:don't use; 1:use||true|integer(int32)||
+|orderRequestDTO|下单请求参数|body|true| | |
+|&emsp;&emsp;type|提单类型,可用值:MARKET_PRICE,LIMIT_PRICE||true|string||
+|&emsp;&emsp;amount|购买或出售总额||true|number||
+|&emsp;&emsp;symbol|交易对. 格式：BTC-USDT||true|string||
+|&emsp;&emsp;direction|下单方向,可用值:BUY,SELL||true|string||
+|&emsp;&emsp;price|价格||true|number||
+|&emsp;&emsp;useDiscount|是否使用折扣,0:不使用; 1:使用||true|integer(int32)||
 
 
 **响应状态**:
@@ -54,7 +60,7 @@
 
 | 状态码 | 说明 | schema |
 | -------- | -------- | ----- | 
-|200|OK|CommonResultBigDecimal|
+|200|OK| |
 
 
 **响应参数**:
@@ -77,7 +83,7 @@
 ```
 
 
-## Wallet Account
+## 获取钱包账户列表
 
 
 **接口地址**:`/spot/open-api/v1/wallets`
@@ -89,7 +95,7 @@
 **请求数据类型**:`application/x-www-form-urlencoded`
 
 
-**响应数据类型**:`*/*`
+**响应数据类型**:`application/json`
 
 
 **接口描述**:
@@ -106,7 +112,7 @@
 
 | 状态码 | 说明 | schema |
 | -------- | -------- | ----- | 
-|200|OK|CommonResultBigDecimal|
+|200|OK||
 
 
 **响应参数**:
@@ -129,7 +135,7 @@
 ```
 
 
-## Get the symbol latest prices
+## 获取交易对最新价格
 
 
 **接口地址**:`/spot/open-api/v1/last-price/{symbol}`
@@ -141,7 +147,7 @@
 **请求数据类型**:`application/x-www-form-urlencoded`
 
 
-**响应数据类型**:`*/*`
+**响应数据类型**:`application/json`
 
 
 **接口描述**:
@@ -152,7 +158,7 @@
 
 | 参数名称 | 参数说明 | 请求类型    | 是否必须 | 数据类型 | schema |
 | -------- | -------- | ----- | -------- | -------- | ------ |
-|symbol|symbol. format：BTC-USDT|path|true|string||
+|symbol|交易对, 格式：BTC-USDT|path|true|string||
 
 
 **响应状态**:
@@ -160,7 +166,7 @@
 
 | 状态码 | 说明 | schema |
 | -------- | -------- | ----- | 
-|200|OK|CommonResultBigDecimal|
+|200|OK||
 
 
 **响应参数**:
@@ -183,7 +189,7 @@
 ```
 
 
-## Get real-time K-line data
+## 获取实时K线数据
 
 
 **接口地址**:`/spot/open-api/v1/k-line/{symbol}/{interval}`
@@ -195,7 +201,7 @@
 **请求数据类型**:`application/x-www-form-urlencoded`
 
 
-**响应数据类型**:`*/*`
+**响应数据类型**:`application/json`
 
 
 **接口描述**:
@@ -206,8 +212,8 @@
 
 | 参数名称 | 参数说明 | 请求类型    | 是否必须 | 数据类型 | schema |
 | -------- | -------- | ----- | -------- | -------- | ------ |
-|symbol|symbol. format：BTC-USDT|path|true|string||
-|interval|K-line interval, available: M1,M5,M15,M30,H1,H4,D1,W1,MON1|path|true|string||
+|symbol|交易对, 格式：BTC-USDT|path|true|string||
+|interval|K线间隔, 可用值: M1,M5,M15,M30,H1,H4,D1,W1,MON1|path|true|string||
 
 
 **响应状态**:
@@ -215,7 +221,7 @@
 
 | 状态码 | 说明 | schema |
 | -------- | -------- | ----- | 
-|200|OK|CommonResultObject|
+|200|OK| |
 
 
 **响应参数**:
@@ -238,7 +244,7 @@
 ```
 
 
-## Recent Trades
+## 获取交易对最新交易信息
 
 
 **接口地址**:`/spot/open-api/v1/exchange/{symbol}/recent-trades`
@@ -250,7 +256,7 @@
 **请求数据类型**:`application/x-www-form-urlencoded`
 
 
-**响应数据类型**:`*/*`
+**响应数据类型**:`application/json`
 
 
 **接口描述**:
@@ -261,8 +267,8 @@
 
 | 参数名称 | 参数说明 | 请求类型    | 是否必须 | 数据类型 | schema |
 | -------- | -------- | ----- | -------- | -------- | ------ |
-|symbol|symbol. format：BTC-USDT|path|true|string||
-|count|Number of result records|query|true|integer(int32)||
+|symbol|交易对, 格式：BTC-USDT|path|true|string||
+|count|交易记录数,最大100|query|true|integer(int32)||
 
 
 **响应状态**:
@@ -270,7 +276,7 @@
 
 | 状态码 | 说明 | schema |
 | -------- | -------- | ----- | 
-|200|OK|CommonResultBigDecimal|
+|200|OK| |
 
 
 **响应参数**:
@@ -293,7 +299,7 @@
 ```
 
 
-## Realtime Partial Book Depth
+## 获取实时盘口数据
 
 
 **接口地址**:`/spot/open-api/v1/exchange/{symbol}/partial`
@@ -305,7 +311,7 @@
 **请求数据类型**:`application/x-www-form-urlencoded`
 
 
-**响应数据类型**:`*/*`
+**响应数据类型**:`application/json`
 
 
 **接口描述**:
@@ -316,8 +322,8 @@
 
 | 参数名称 | 参数说明 | 请求类型    | 是否必须 | 数据类型 | schema |
 | -------- | -------- | ----- | -------- | -------- | ------ |
-|symbol|symbol. format：BTC-USDT|path|true|string||
-|depth|Count of depth|query|true|integer(int32)||
+|symbol|交易对, 格式：BTC-USDT|path|true|string||
+|depth|盘口的档数,买盘和卖盘分别计算|query|true|integer(int32)||
 
 
 **响应状态**:
@@ -325,7 +331,7 @@
 
 | 状态码 | 说明 | schema |
 | -------- | -------- | ----- | 
-|200|OK|CommonResultBigDecimal|
+|200|OK| |
 
 
 **响应参数**:
