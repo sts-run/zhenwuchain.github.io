@@ -46,10 +46,10 @@ Host: `https://wowexchange.xyz/gateway-api`
 | Parameter name | Description | Type    | Required | Data Type | schema |
 | -------- | -------- | ----- | -------- | -------- | ------ |
 |orderRequestDTO|Order request param|body|true|OrderRequestDTO|OrderRequestDTO|
-|&emsp;&emsp;type|Order type,可用值:MARKET_PRICE,LIMIT_PRICE||true|string||
+|&emsp;&emsp;type|Order type,  Available:MARKET_PRICE,LIMIT_PRICE||true|string||
 |&emsp;&emsp;amount|Buy or sell amount||true|number||
 |&emsp;&emsp;symbol|symbol. format：BTC-USDT||true|string||
-|&emsp;&emsp;direction|Order direction,可用值:BUY,SELL||true|string||
+|&emsp;&emsp;direction|Order direction,  Available:BUY,SELL||true|string||
 |&emsp;&emsp;price|price||true|number||
 |&emsp;&emsp;useDiscount|Whether to use the discount,0:don't use; 1:use||true|integer(int32)||
 
