@@ -12,7 +12,7 @@ Host: `https://wowexchange.xyz/gateway-api`
 **Address**: `/spot/open-api/v1/exchange/order`
 
 
-**Method**: `POST`
+**Method**: <code class="method_post" style="">POST</code>
 
 
 
@@ -88,7 +88,7 @@ Host: `https://wowexchange.xyz/gateway-api`
 **Address**: `/spot/open-api/v1/wallets`
 
 
-**Method**: `GET`
+**Method**: <code class="method_get" style="">GET</code>
 
 
 **Request Content-Type**: `application/x-www-form-urlencoded`
@@ -140,7 +140,7 @@ not available
 **Address**: `/spot/open-api/v1/last-price/{symbol}`
 
 
-**Method**: `GET`
+**Method**: <code class="method_get" style="">GET</code>
 
 
 **Request Content-Type**: `application/x-www-form-urlencoded`
@@ -194,7 +194,7 @@ not available
 **Address**: `/spot/open-api/v1/k-line/{symbol}/{interval}`
 
 
-**Method**: `GET`
+**Method**: <code class="method_get" style="">GET</code>
 
 
 **Request Content-Type**: `application/x-www-form-urlencoded`
@@ -249,7 +249,7 @@ not available
 **Address**: `/spot/open-api/v1/exchange/{symbol}/recent-trades`
 
 
-**Method**: `GET`
+**Method**: <code class="method_get" style="">GET</code>
 
 
 **Request Content-Type**: `application/x-www-form-urlencoded`
@@ -304,7 +304,7 @@ not available
 **Address**: `/spot/open-api/v1/exchange/{symbol}/partial`
 
 
-**Method**: `GET`
+**Method**: <code class="method_get" style="">GET</code>
 
 
 **Request Content-Type**: `application/x-www-form-urlencoded`

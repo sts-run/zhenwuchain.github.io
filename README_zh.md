@@ -3,7 +3,7 @@
 
 [中文文档](./README_zh.html),  [English API doc](./)
 
-## 1.文档描述
+## 1.通用说明
 Host: `https://wowexchange.xyz/gateway-api`
 
 
@@ -14,7 +14,7 @@ Host: `https://wowexchange.xyz/gateway-api`
 **接口地址**: `/spot/open-api/v1/exchange/order`
 
 
-**请求方式**: `POST`
+**请求方式**: <code class="method_post" style="">POST</code>
 
 
 **请求数据类型**: `application/json`
@@ -89,7 +89,7 @@ Host: `https://wowexchange.xyz/gateway-api`
 **接口地址**: `/spot/open-api/v1/wallets`
 
 
-**请求方式**: `GET`
+**请求方式**: <code class="method_get" style="">GET</code>
 
 
 **请求数据类型**: `application/x-www-form-urlencoded`
@@ -141,7 +141,7 @@ Host: `https://wowexchange.xyz/gateway-api`
 **接口地址**: `/spot/open-api/v1/last-price/{symbol}`
 
 
-**请求方式**: `GET`
+**请求方式**: <code class="method_get" style="">GET</code>
 
 
 **请求数据类型**: `application/x-www-form-urlencoded`
@@ -195,7 +195,7 @@ Host: `https://wowexchange.xyz/gateway-api`
 **接口地址**: `/spot/open-api/v1/k-line/{symbol}/{interval}`
 
 
-**请求方式**: `GET`
+**请求方式**: <code class="method_get" style="">GET</code>
 
 
 **请求数据类型**: `application/x-www-form-urlencoded`
@@ -250,7 +250,7 @@ Host: `https://wowexchange.xyz/gateway-api`
 **接口地址**: `/spot/open-api/v1/exchange/{symbol}/recent-trades`
 
 
-**请求方式**: `GET`
+**请求方式**: <code class="method_get" style="">GET</code>
 
 
 **请求数据类型**: `application/x-www-form-urlencoded`
@@ -305,7 +305,7 @@ Host: `https://wowexchange.xyz/gateway-api`
 **接口地址**: `/spot/open-api/v1/exchange/{symbol}/partial`
 
 
-**请求方式**: `GET`
+**请求方式**: <code class="method_get" style="">GET</code>
 
 
 **请求数据类型**: `application/x-www-form-urlencoded`
