@@ -3,10 +3,10 @@
 
 [中文文档](./README_zh.html),  [English API doc](./)
 
-## General Info
-Host: `https://wowexchange.xyz/gateway-api/`
+## 1.General Info
+Host: `https://wowexchange.xyz/gateway-api`
 
-## Order
+## 2.Order
 
 
 **Address**: `/spot/open-api/v1/exchange/order`
@@ -28,7 +28,7 @@ Host: `https://wowexchange.xyz/gateway-api/`
 **Request Demo**:
 
 
-```javascript
+```json
 {
   "type": "",
   "amount": 0,
@@ -73,7 +73,7 @@ Host: `https://wowexchange.xyz/gateway-api/`
 
 
 **Response Demo**:
-```javascript
+```json
 {
 	"code": 0,
 	"msg": "",
@@ -82,7 +82,7 @@ Host: `https://wowexchange.xyz/gateway-api/`
 ```
 
 
-## Wallet Account
+## 3.Wallet Account
 
 
 **Address**: `/spot/open-api/v1/wallets`
@@ -125,7 +125,7 @@ not available
 
 
 **Response Demo**:
-```javascript
+```json
 {
 	"code": 0,
 	"msg": "",
@@ -134,7 +134,7 @@ not available
 ```
 
 
-## Get the symbol latest prices
+## 4.Get the symbol latest prices
 
 
 **Address**: `/spot/open-api/v1/last-price/{symbol}`
@@ -179,7 +179,7 @@ not available
 
 
 **Response Demo**:
-```javascript
+```json
 {
 	"code": 0,
 	"msg": "",
@@ -188,7 +188,7 @@ not available
 ```
 
 
-## Get real-time K-line data
+## 5.Get real-time K-line data
 
 
 **Address**: `/spot/open-api/v1/k-line/{symbol}/{interval}`
@@ -234,7 +234,7 @@ not available
 
 
 **Response Demo**:
-```javascript
+```json
 {
 	"code": 0,
 	"msg": "",
@@ -243,7 +243,7 @@ not available
 ```
 
 
-## Recent Trades
+## 6.Recent Trades
 
 
 **Address**: `/spot/open-api/v1/exchange/{symbol}/recent-trades`
@@ -289,7 +289,7 @@ not available
 
 
 **Response Demo**:
-```javascript
+```json
 {
 	"code": 0,
 	"msg": "",
@@ -298,7 +298,7 @@ not available
 ```
 
 
-## Realtime Partial Book Depth
+## 7.Realtime Partial Book Depth
 
 
 **Address**: `/spot/open-api/v1/exchange/{symbol}/partial`
@@ -344,7 +344,7 @@ not available
 
 
 **Response Demo**:
-```javascript
+```json
 {
 	"code": 0,
 	"msg": "",

@@ -3,12 +3,12 @@
 
 [中文文档](./README_zh.html),  [English API doc](./)
 
-## General Info
-Host: `https://wowexchange.xyz/gateway-api/`
+## 1.文档描述
+Host: `https://wowexchange.xyz/gateway-api`
 
 
 
-## 现货下单接口
+## 2.现货下单接口
 
 
 **接口地址**: `/spot/open-api/v1/exchange/order`
@@ -29,7 +29,7 @@ Host: `https://wowexchange.xyz/gateway-api/`
 **请求示例**:
 
 
-```javascript
+```json
 {
   "type": "",
   "amount": 0,
@@ -74,7 +74,7 @@ Host: `https://wowexchange.xyz/gateway-api/`
 
 
 **响应示例**:
-```javascript
+```json
 {
 	"code": 0,
 	"msg": "",
@@ -83,19 +83,19 @@ Host: `https://wowexchange.xyz/gateway-api/`
 ```
 
 
-## 获取钱包账户列表
+## 3.获取钱包账户列表
 
 
-**接口地址**:`/spot/open-api/v1/wallets`
+**接口地址**: `/spot/open-api/v1/wallets`
 
 
-**请求方式**:`GET`
+**请求方式**: `GET`
 
 
-**请求数据类型**:`application/x-www-form-urlencoded`
+**请求数据类型**: `application/x-www-form-urlencoded`
 
 
-**响应数据类型**:`application/json`
+**响应数据类型**: `application/json`
 
 
 **接口描述**:
@@ -126,7 +126,7 @@ Host: `https://wowexchange.xyz/gateway-api/`
 
 
 **响应示例**:
-```javascript
+```json
 {
 	"code": 0,
 	"msg": "",
@@ -135,19 +135,19 @@ Host: `https://wowexchange.xyz/gateway-api/`
 ```
 
 
-## 获取交易对最新价格
+## 4.获取交易对最新价格
 
 
-**接口地址**:`/spot/open-api/v1/last-price/{symbol}`
+**接口地址**: `/spot/open-api/v1/last-price/{symbol}`
 
 
-**请求方式**:`GET`
+**请求方式**: `GET`
 
 
-**请求数据类型**:`application/x-www-form-urlencoded`
+**请求数据类型**: `application/x-www-form-urlencoded`
 
 
-**响应数据类型**:`application/json`
+**响应数据类型**: `application/json`
 
 
 **接口描述**:
@@ -180,7 +180,7 @@ Host: `https://wowexchange.xyz/gateway-api/`
 
 
 **响应示例**:
-```javascript
+```json
 {
 	"code": 0,
 	"msg": "",
@@ -189,19 +189,19 @@ Host: `https://wowexchange.xyz/gateway-api/`
 ```
 
 
-## 获取实时K线数据
+## 5.获取实时K线数据
 
 
-**接口地址**:`/spot/open-api/v1/k-line/{symbol}/{interval}`
+**接口地址**: `/spot/open-api/v1/k-line/{symbol}/{interval}`
 
 
-**请求方式**:`GET`
+**请求方式**: `GET`
 
 
-**请求数据类型**:`application/x-www-form-urlencoded`
+**请求数据类型**: `application/x-www-form-urlencoded`
 
 
-**响应数据类型**:`application/json`
+**响应数据类型**: `application/json`
 
 
 **接口描述**:
@@ -235,7 +235,7 @@ Host: `https://wowexchange.xyz/gateway-api/`
 
 
 **响应示例**:
-```javascript
+```json
 {
 	"code": 0,
 	"msg": "",
@@ -244,19 +244,19 @@ Host: `https://wowexchange.xyz/gateway-api/`
 ```
 
 
-## 获取交易对最新交易信息
+## 6.获取交易对最新交易信息
 
 
-**接口地址**:`/spot/open-api/v1/exchange/{symbol}/recent-trades`
+**接口地址**: `/spot/open-api/v1/exchange/{symbol}/recent-trades`
 
 
-**请求方式**:`GET`
+**请求方式**: `GET`
 
 
-**请求数据类型**:`application/x-www-form-urlencoded`
+**请求数据类型**: `application/x-www-form-urlencoded`
 
 
-**响应数据类型**:`application/json`
+**响应数据类型**: `application/json`
 
 
 **接口描述**:
@@ -290,7 +290,7 @@ Host: `https://wowexchange.xyz/gateway-api/`
 
 
 **响应示例**:
-```javascript
+```json
 {
 	"code": 0,
 	"msg": "",
@@ -299,19 +299,19 @@ Host: `https://wowexchange.xyz/gateway-api/`
 ```
 
 
-## 获取实时盘口数据
+## 7.获取实时盘口数据
 
 
-**接口地址**:`/spot/open-api/v1/exchange/{symbol}/partial`
+**接口地址**: `/spot/open-api/v1/exchange/{symbol}/partial`
 
 
-**请求方式**:`GET`
+**请求方式**: `GET`
 
 
-**请求数据类型**:`application/x-www-form-urlencoded`
+**请求数据类型**: `application/x-www-form-urlencoded`
 
 
-**响应数据类型**:`application/json`
+**响应数据类型**: `application/json`
 
 
 **接口描述**:
@@ -345,7 +345,7 @@ Host: `https://wowexchange.xyz/gateway-api/`
 
 
 **响应示例**:
-```javascript
+```json
 {
 	"code": 0,
 	"msg": "",
