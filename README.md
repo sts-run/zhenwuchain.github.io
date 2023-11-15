@@ -160,7 +160,7 @@ unavailable
 |&emsp;&emsp; freeAmount | Available quantity | number||
 |&emsp;&emsp; freezeAmount | Frozen quantity | number||
 |&emsp;&emsp; status | Account status: activate active, freeze free | string||
-|&emsp;&emsp; freeUSDtAmount | Number of USDTs with equal freeAmount | number||
+|&emsp;&emsp; freeUSDTAmount | Number of USDTs with equal freeAmount | number||
 |&emsp;&emsp; freezeUSDTAmount | Number of USDTs with equal freezeAmount | number||
 |&emsp;&emsp; coinLogo | Currency icon address | string||
 |&emsp;&emsp; coinDecimal | Currency precision | int||
@@ -308,29 +308,29 @@ Obtain the real-time price of the specified Symbol, and the response 'data' of t
 **Response Example** : 
 ```json
 {
-	"code": 0,
-	"msg": "",
-	"data": {
-		"s": "",
-		"i": "",
-		"dd": {
-			"o": "",
-			"h": "",
-			"l": "",
-			"c": "",
-			"h24": "",
-			"l24": "",
-			"v24": "",
-			"vv24": "",
-			"p24": "",
-			"cp": "",
-			"v": "",
-			"vv": "",
-			"pt": 0,
-			"sse": "",
-			"sos": ""
-		}
-	}
+    "code": 0,
+    "msg": "",
+    "data": {
+        "s": "",
+        "i": "",
+        "dd": {
+            "o": "",
+            "h": "",
+            "l": "",
+            "c": "",
+            "h24": "",
+            "l24": "",
+            "v24": "",
+            "vv24": "",
+            "p24": "",
+            "cp": "",
+            "v": "",
+            "vv": "",
+            "pt": 0,
+            "sse": "",
+            "sos": ""
+        }
+    }
 }
 ```
 
