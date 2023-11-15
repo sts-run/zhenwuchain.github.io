@@ -300,17 +300,55 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N......6AJ" "https://wowexchange.xyz/g
 
 | 参数名称 | 参数说明 | 类型 | schema |
 | -------- | -------- | ----- |----- | 
-|code||int|int|
+|code||integer(int32)|integer(int32)|
 |msg||string||
-|data||object||
+|data||KlineSubscribeData|KlineSubscribeData|
+|&emsp;&emsp;s|交易对|string||
+|&emsp;&emsp;i|时间间隔|string||
+|&emsp;&emsp;dd|k线数据|KLineRespData|KLineRespData|
+|&emsp;&emsp;&emsp;&emsp;o|开始价格|string||
+|&emsp;&emsp;&emsp;&emsp;h|高位价格|string||
+|&emsp;&emsp;&emsp;&emsp;l|地位价格|string||
+|&emsp;&emsp;&emsp;&emsp;c|结束价格|string||
+|&emsp;&emsp;&emsp;&emsp;h24|近24小时最高价|string||
+|&emsp;&emsp;&emsp;&emsp;l24|近24小时最低价|string||
+|&emsp;&emsp;&emsp;&emsp;v24|近24小时成交量|string||
+|&emsp;&emsp;&emsp;&emsp;vv24|近24小时成交额|string||
+|&emsp;&emsp;&emsp;&emsp;p24|24小时价格变动比|string||
+|&emsp;&emsp;&emsp;&emsp;cp|24小时价格变动量|string||
+|&emsp;&emsp;&emsp;&emsp;v|成交量|string||
+|&emsp;&emsp;&emsp;&emsp;vv|成交额|string||
+|&emsp;&emsp;&emsp;&emsp;pt|时间区间|integer||
+|&emsp;&emsp;&emsp;&emsp;sse|k线无需关心此值|string||
+|&emsp;&emsp;&emsp;&emsp;sos|k线无需关心此值|string||
 
 
 **响应示例**:
 ```json
 {
-    "code": 200,
-    "msg": "",
-    "data": {}
+	"code": 0,
+	"msg": "",
+	"data": {
+		"s": "",
+		"i": "",
+		"dd": {
+			"o": "",
+			"h": "",
+			"l": "",
+			"c": "",
+			"h24": "",
+			"l24": "",
+			"v24": "",
+			"vv24": "",
+			"p24": "",
+			"cp": "",
+			"v": "",
+			"vv": "",
+			"pt": 0,
+			"sse": "",
+			"sos": ""
+		}
+	}
 }
 ```
 
