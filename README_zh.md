@@ -4,8 +4,36 @@
 [中文文档](./README_zh.html),  [English API doc](./)
 
 ## 1.通用说明
+
+
+<div class="remark">
+
+该文档列出的接口除明确说明,均需要登录才可以访问,请联系我们下发token以供访问.  
+
+连接信息如下:  
 Host: `https://wowexchange.xyz/gateway-api`
 
+验证方式:  
+验证信息存放在请求头中. 名称(key)为 `token`, 值为获取到的token.
+CURL参考:
+```sh
+curl -X GET -H  "Accept:*/*" -H  "token:S0N...fl9fPDyfV80......qloDwmk32iIjM...6AJ" "https://wowexchange.xyz/gateway-api/spot/open-api/v1/wallets"
+```
+
+响应结果说明: 
+请求成功后返回结构如下,  
+```json
+{
+	"code": 200, 		//响应业务代码, 200 表示成功
+	"msg": "",		//错误消息,非错误情况下是""
+	"data": 0		//业务结果,根据请求不同结果也不同. 详见各接口说明
+}
+```
+
+特别说明:  
+大数字和浮点数在返回的json中使用字符串的形式传递是为了避免数字在传递过程中丢失精度.
+
+</div>
 
 
 ## 2.现货下单接口
@@ -14,7 +42,7 @@ Host: `https://wowexchange.xyz/gateway-api`
 **接口地址**: `/spot/open-api/v1/exchange/order`
 
 
-**请求方式**: <code class="method_post" style="">POST</code>
+**请求方式**: <code class="method_post">POST</code>
 
 
 **请求数据类型**: `application/json`
@@ -24,17 +52,24 @@ Host: `https://wowexchange.xyz/gateway-api`
 
 
 **接口描述**:
+<div class="remark">
 
+现货下单接口, 下单失败时错误原因在 `msg` 字段中.   
+`type` 字段为下单类型, 允许2个值  
+- 0 : 市价
+- 1 : 限价
+
+</div>
 
 **请求示例**:
 
 
 ```json
 {
-  "type": "",
+  "type": 0,
   "amount": 0,
   "symbol": "BTC-USDT",
-  "direction": "",
+  "direction": 0,
   "price": 0,
   "useDiscount": 0
 }
@@ -47,12 +82,12 @@ Host: `https://wowexchange.xyz/gateway-api`
 | 参数名称 | 参数说明 | 请求类型    | 是否必须 | 数据类型 | schema |
 | -------- | -------- | ----- | -------- | -------- | ------ |
 |orderRequestDTO|下单请求参数|body|true| | |
-|&emsp;&emsp;type|提单类型,可用值:MARKET_PRICE,LIMIT_PRICE||true|string||
+|&emsp;&emsp;type|下单类型,可用值: 0:市价; 1:限价||true|int||
 |&emsp;&emsp;amount|购买或出售总额||true|number||
 |&emsp;&emsp;symbol|交易对. 格式：BTC-USDT||true|string||
-|&emsp;&emsp;direction|下单方向,可用值:BUY,SELL||true|string||
+|&emsp;&emsp;direction|下单方向,可用值: 0:买; 1:卖||true|int||
 |&emsp;&emsp;price|价格||true|number||
-|&emsp;&emsp;useDiscount|是否使用折扣,0:不使用; 1:使用||true|integer(int32)||
+|&emsp;&emsp;useDiscount|是否使用折扣,可用值: 0:不使用; 1:使用||true|int||
 
 
 **响应状态**:
@@ -68,17 +103,17 @@ Host: `https://wowexchange.xyz/gateway-api`
 
 | 参数名称 | 参数说明 | 类型 | schema |
 | -------- | -------- | ----- |----- | 
-|code||integer(int32)|integer(int32)|
+|code||int|int|
 |msg||string||
-|data||number||
+|data| 订单ID |string||
 
 
 **响应示例**:
 ```json
 {
-	"code": 0,
+	"code": 200,
 	"msg": "",
-	"data": 0
+	"data": "5j7bsi..."
 }
 ```
 
@@ -92,14 +127,19 @@ Host: `https://wowexchange.xyz/gateway-api`
 **请求方式**: <code class="method_get" style="">GET</code>
 
 
-**请求数据类型**: `application/x-www-form-urlencoded`
-
-
 **响应数据类型**: `application/json`
 
 
 **接口描述**:
+<div class="remark">
 
+
+获取当前用户的所有钱包信息  
+
+
+
+
+</div>
 
 **请求参数**:
 
@@ -120,17 +160,43 @@ Host: `https://wowexchange.xyz/gateway-api`
 
 | 参数名称 | 参数说明 | 类型 | schema |
 | -------- | -------- | ----- |----- | 
-|code||integer(int32)|integer(int32)|
+|code||int|int|
 |msg||string||
-|data||number||
+|data||array| |
+|&emsp;&emsp;id|ID|string||
+|&emsp;&emsp;userId|用户ID|string||
+|&emsp;&emsp;coin|币种|string||
+|&emsp;&emsp;coinId|币种|string||
+|&emsp;&emsp;freeAmount|可用数量|number||
+|&emsp;&emsp;freezeAmount|冻结数量|number||
+|&emsp;&emsp;status|账户状态: 激活active, 冻结freeze|string||
+|&emsp;&emsp;freeUSDTAmount|可用数量相等的USDT数量|number||
+|&emsp;&emsp;freezeUSDTAmount|冻结数量相等的USDT数量|number||
+|&emsp;&emsp;coinLogo|币种图标地址|string||
+|&emsp;&emsp;coinDecimal|货币精度|int||
+
 
 
 **响应示例**:
 ```json
 {
-	"code": 0,
+	"code": 200,
 	"msg": "",
-	"data": 0
+	"data": [
+		{
+			"id": "",
+			"userId": "",
+			"coin": "",
+			"coinId": "",
+			"freeAmount": 0,
+			"freezeAmount": 0,
+			"status": "",
+			"freeUSDTAmount": 0,
+			"freezeUSDTAmount": 0,
+			"coinLogo": "",
+			"coinDecimal": 0
+		}
+	]
 }
 ```
 
@@ -144,14 +210,17 @@ Host: `https://wowexchange.xyz/gateway-api`
 **请求方式**: <code class="method_get" style="">GET</code>
 
 
-**请求数据类型**: `application/x-www-form-urlencoded`
-
-
 **响应数据类型**: `application/json`
 
 
 **接口描述**:
+<div class="remark">
 
+获取指定交易对的实时价格,此接口的响应 `data` 是最新价格.
+
+
+
+</div>
 
 **请求参数**:
 
@@ -174,17 +243,17 @@ Host: `https://wowexchange.xyz/gateway-api`
 
 | 参数名称 | 参数说明 | 类型 | schema |
 | -------- | -------- | ----- |----- | 
-|code||integer(int32)|integer(int32)|
+|code||int|int|
 |msg||string||
-|data||number||
+|data|交易对的当前价格|number||
 
 
 **响应示例**:
 ```json
 {
-	"code": 0,
+	"code": 200,
 	"msg": "",
-	"data": 0
+	"data": "3968.2"
 }
 ```
 
@@ -198,14 +267,16 @@ Host: `https://wowexchange.xyz/gateway-api`
 **请求方式**: <code class="method_get" style="">GET</code>
 
 
-**请求数据类型**: `application/x-www-form-urlencoded`
-
-
 **响应数据类型**: `application/json`
 
 
 **接口描述**:
+<div class="remark">
 
+
+
+
+</div>
 
 **请求参数**:
 
@@ -229,7 +300,7 @@ Host: `https://wowexchange.xyz/gateway-api`
 
 | 参数名称 | 参数说明 | 类型 | schema |
 | -------- | -------- | ----- |----- | 
-|code||integer(int32)|integer(int32)|
+|code||int|int|
 |msg||string||
 |data||object||
 
@@ -237,7 +308,7 @@ Host: `https://wowexchange.xyz/gateway-api`
 **响应示例**:
 ```json
 {
-	"code": 0,
+	"code": 200,
 	"msg": "",
 	"data": {}
 }
@@ -253,14 +324,16 @@ Host: `https://wowexchange.xyz/gateway-api`
 **请求方式**: <code class="method_get" style="">GET</code>
 
 
-**请求数据类型**: `application/x-www-form-urlencoded`
-
-
 **响应数据类型**: `application/json`
 
 
 **接口描述**:
+<div class="remark">
 
+
+
+
+</div>
 
 **请求参数**:
 
@@ -268,7 +341,7 @@ Host: `https://wowexchange.xyz/gateway-api`
 | 参数名称 | 参数说明 | 请求类型    | 是否必须 | 数据类型 | schema |
 | -------- | -------- | ----- | -------- | -------- | ------ |
 |symbol|交易对, 格式：BTC-USDT|path|true|string||
-|count|交易记录数,最大100|query|true|integer(int32)||
+|count|交易记录数,最大100|query|true|int||
 
 
 **响应状态**:
@@ -284,9 +357,16 @@ Host: `https://wowexchange.xyz/gateway-api`
 
 | 参数名称 | 参数说明 | 类型 | schema |
 | -------- | -------- | ----- |----- | 
-|code||integer(int32)|integer(int32)|
+|code||int|int|
 |msg||string||
-|data||number||
+|data||object |  |
+|&emsp;&emsp;s|交易对|string||
+|&emsp;&emsp;ps|记录数量|int||
+|&emsp;&emsp;i|交易记录列表|array| |
+|&emsp;&emsp;&emsp;&emsp;a|数量|number||
+|&emsp;&emsp;&emsp;&emsp;p|价格|number||
+|&emsp;&emsp;&emsp;&emsp;d|交易方向, 0:买, 1:卖|int||
+|&emsp;&emsp;&emsp;&emsp;t|交易成交时间|long||
 
 
 **响应示例**:
@@ -294,7 +374,18 @@ Host: `https://wowexchange.xyz/gateway-api`
 {
 	"code": 0,
 	"msg": "",
-	"data": 0
+	"data": {
+		"s": "",
+		"ps": 0,
+		"i": [
+			{
+				"a": 0,
+				"p": 0,
+				"d": 0,
+				"t": 0
+			}
+		]
+	}
 }
 ```
 
@@ -308,14 +399,16 @@ Host: `https://wowexchange.xyz/gateway-api`
 **请求方式**: <code class="method_get" style="">GET</code>
 
 
-**请求数据类型**: `application/x-www-form-urlencoded`
-
-
 **响应数据类型**: `application/json`
 
 
 **接口描述**:
+<div class="remark">
 
+获取指定交易对的买盘和卖盘数据,每个盘返回的最大记录数量为`depth`,最大20档.
+
+
+</div>
 
 **请求参数**:
 
@@ -323,7 +416,7 @@ Host: `https://wowexchange.xyz/gateway-api`
 | 参数名称 | 参数说明 | 请求类型    | 是否必须 | 数据类型 | schema |
 | -------- | -------- | ----- | -------- | -------- | ------ |
 |symbol|交易对, 格式：BTC-USDT|path|true|string||
-|depth|盘口的档数,买盘和卖盘分别计算|query|true|integer(int32)||
+|depth|盘口的档数,买盘和卖盘分别计算,最大20|query|true|int||
 
 
 **响应状态**:
@@ -339,16 +432,40 @@ Host: `https://wowexchange.xyz/gateway-api`
 
 | 参数名称 | 参数说明 | 类型 | schema |
 | -------- | -------- | ----- |----- | 
-|code||integer(int32)|integer(int32)|
+|code||int|int|
 |msg||string||
-|data||number||
+|data||object| |
+|&emsp;&emsp;s|交易对|string||
+|&emsp;&emsp;a|买盘|array| |
+|&emsp;&emsp;&emsp;&emsp;p|价格|number||
+|&emsp;&emsp;&emsp;&emsp;a|数量|number||
+|&emsp;&emsp;&emsp;&emsp;t|总额|number||
+|&emsp;&emsp;b|买盘|array| |
+|&emsp;&emsp;&emsp;&emsp;p|价格|number||
+|&emsp;&emsp;&emsp;&emsp;a|数量|number||
+|&emsp;&emsp;&emsp;&emsp;t|总额|number||
 
 
 **响应示例**:
-```json
+```javascript
 {
 	"code": 0,
 	"msg": "",
-	"data": 0
+	"data": {
+		"s": "",
+		"a": [
+			{
+				"p": 0,
+				"a": 0,
+				"t": 0
+			}
+		],
+		"b": [
+			{
+				"p": 0,
+				"a": 0,
+				"t": 0
+			}
+		]
+	}
 }
-```
