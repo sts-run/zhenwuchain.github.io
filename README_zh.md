@@ -17,16 +17,16 @@ Host: `https://wowexchange.xyz/gateway-api`
 验证信息存放在请求头中. 名称(key)为 `token`, 值为获取到的token.
 CURL参考:
 ```sh
-curl -X GET -H  "Accept:*/*" -H  "token:S0N...fl9fPDyfV80......qloDwmk32iIjM...6AJ" "https://wowexchange.xyz/gateway-api/spot/open-api/v1/wallets"
+curl -X GET -H  "Accept:*/*" -H  "token:S0N......6AJ" "https://wowexchange.xyz/gateway-api/spot/open-api/v1/wallets"
 ```
 
 响应结果说明: 
 请求成功后返回结构如下,  
 ```javascript
 {
-	"code": 200, 		//响应业务代码, 200 表示成功
-	"msg": "",			//错误消息,非错误情况下是""
-	"data": 0			//业务结果,根据请求不同结果也不同. 详见各接口说明
+    "code": 200,          //响应业务代码, 200 表示成功
+    "msg": "",            //错误消息,非错误情况下是""
+    "data": 0             //业务结果,根据请求不同结果也不同. 详见各接口说明
 }
 ```
 
@@ -111,9 +111,9 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N...fl9fPDyfV80......qloDwmk32iIjM...6
 **响应示例**:
 ```json
 {
-	"code": 200,
-	"msg": "",
-	"data": "5j7bsi..."
+    "code": 200,
+    "msg": "",
+    "data": "5j7bsi..."
 }
 ```
 
@@ -180,23 +180,23 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N...fl9fPDyfV80......qloDwmk32iIjM...6
 **响应示例**:
 ```json
 {
-	"code": 200,
-	"msg": "",
-	"data": [
-		{
-			"id": "",
-			"userId": "",
-			"coin": "",
-			"coinId": "",
-			"freeAmount": 0,
-			"freezeAmount": 0,
-			"status": "",
-			"freeUSDTAmount": 0,
-			"freezeUSDTAmount": 0,
-			"coinLogo": "",
-			"coinDecimal": 0
-		}
-	]
+    "code": 200,
+    "msg": "",
+    "data": [
+        {
+            "id": "",
+            "userId": "",
+            "coin": "",
+            "coinId": "",
+            "freeAmount": 0,
+            "freezeAmount": 0,
+            "status": "",
+            "freeUSDTAmount": 0,
+            "freezeUSDTAmount": 0,
+            "coinLogo": "",
+            "coinDecimal": 0
+        }
+    ]
 }
 ```
 
@@ -251,9 +251,9 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N...fl9fPDyfV80......qloDwmk32iIjM...6
 **响应示例**:
 ```json
 {
-	"code": 200,
-	"msg": "",
-	"data": "3968.2"
+    "code": 200,
+    "msg": "",
+    "data": "3968.2"
 }
 ```
 
@@ -308,9 +308,9 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N...fl9fPDyfV80......qloDwmk32iIjM...6
 **响应示例**:
 ```json
 {
-	"code": 200,
-	"msg": "",
-	"data": {}
+    "code": 200,
+    "msg": "",
+    "data": {}
 }
 ```
 
@@ -372,20 +372,20 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N...fl9fPDyfV80......qloDwmk32iIjM...6
 **响应示例**:
 ```json
 {
-	"code": 0,
-	"msg": "",
-	"data": {
-		"s": "",
-		"ps": 0,
-		"i": [
-			{
-				"a": 0,
-				"p": 0,
-				"d": 0,
-				"t": 0
-			}
-		]
-	}
+    "code": 0,
+    "msg": "",
+    "data": {
+        "s": "",
+        "ps": 0,
+        "i": [
+            {
+                "a": 0,
+                "p": 0,
+                "d": 0,
+                "t": 0
+            }
+        ]
+    }
 }
 ```
 
@@ -446,26 +446,28 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N...fl9fPDyfV80......qloDwmk32iIjM...6
 |&emsp;&emsp;&emsp;&emsp;t|总额|number||
 
 
-**响应示例**:
-```javascript
+**响应示例**:  
+
+```json
 {
-	"code": 0,
-	"msg": "",
-	"data": {
-		"s": "",
-		"a": [
-			{
-				"p": 0,
-				"a": 0,
-				"t": 0
-			}
-		],
-		"b": [
-			{
-				"p": 0,
-				"a": 0,
-				"t": 0
-			}
-		]
-	}
+    "code": 0,
+    "msg": "",
+    "data": {
+        "s": "",
+        "a": [
+            {
+                "p": 0,
+                "a": 0,
+                "t": 0
+            }
+        ],
+        "b": [
+            {
+                "p": 0,
+                "a": 0,
+                "t": 0
+            }
+        ]
+    }
 }
+```
