@@ -6,7 +6,7 @@
 ## 1.通用说明
 
 
-<div class="remark">
+
 
 该文档列出的接口除明确说明,均需要登录才可以访问,请联系我们下发token以供访问.  
 
@@ -33,7 +33,7 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N...fl9fPDyfV80......qloDwmk32iIjM...6
 特别说明:  
 大数字和浮点数在返回的json中使用字符串的形式传递是为了避免数字在传递过程中丢失精度.
 
-</div>
+
 
 
 ## 2.现货下单接口
@@ -52,14 +52,14 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N...fl9fPDyfV80......qloDwmk32iIjM...6
 
 
 **接口描述**:
-<div class="remark">
+
 
 现货下单接口, 下单失败时错误原因在 `msg` 字段中.   
 `type` 字段为下单类型, 允许2个值  
 - 0 : 市价
 - 1 : 限价
 
-</div>
+
 
 **请求示例**:
 
@@ -131,7 +131,7 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N...fl9fPDyfV80......qloDwmk32iIjM...6
 
 
 **接口描述**:
-<div class="remark">
+
 
 
 获取当前用户的所有钱包信息  
@@ -139,7 +139,7 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N...fl9fPDyfV80......qloDwmk32iIjM...6
 
 
 
-</div>
+
 
 **请求参数**:
 
@@ -214,13 +214,13 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N...fl9fPDyfV80......qloDwmk32iIjM...6
 
 
 **接口描述**:
-<div class="remark">
+
 
 获取指定交易对的实时价格,此接口的响应 `data` 是最新价格.
 
 
 
-</div>
+
 
 **请求参数**:
 
@@ -271,12 +271,12 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N...fl9fPDyfV80......qloDwmk32iIjM...6
 
 
 **接口描述**:
-<div class="remark">
 
 
 
 
-</div>
+
+
 
 **请求参数**:
 
@@ -328,12 +328,12 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N...fl9fPDyfV80......qloDwmk32iIjM...6
 
 
 **接口描述**:
-<div class="remark">
 
 
 
 
-</div>
+
+
 
 **请求参数**:
 
@@ -403,12 +403,12 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N...fl9fPDyfV80......qloDwmk32iIjM...6
 
 
 **接口描述**:
-<div class="remark">
+
 
 获取指定交易对的买盘和卖盘数据,每个盘返回的最大记录数量为`depth`,最大20档.
 
 
-</div>
+
 
 **请求参数**:
 
