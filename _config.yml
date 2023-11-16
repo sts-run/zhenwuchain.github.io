@@ -2,7 +2,7 @@ remote_theme: pages-themes/leap-day@v0.2.0
 plugins:
 - jekyll-remote-theme
 
-title: ZhenWu chain
-description: ZhenWu chain open api
+title: Wowexchange
+description: Wowexchange open api
 
 show_downloads: "false"
