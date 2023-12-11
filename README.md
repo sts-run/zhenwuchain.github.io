@@ -8,7 +8,7 @@
 The interfaces listed in this document, unless explicitly stated, require login to access them. Please contact us to issue a token for access  
 
 The connection information is as follows: 
-Host:`https://wowexchange.xyz/gateway-api`
+Host: `https://wowexchange.xyz/gateway-api`
 
 Verification method: 
 The verification information is stored in the request headerThe name (key) is' token ', and the value is the obtained token.  
@@ -23,10 +23,22 @@ After the request is successful, the return structure is as follows:
 ```JavaScript
 {
     "code": 200,  //Response business code, 200 indicates success
-    "msg": "",    //Error message, non error case is
+    "msg": "",    //Error message, non error case is ""
     "data": 0     //Business results, which vary depending on the requestPlease refer to the instructions for each interface for details
 }
 ```
+
+All request headers must include the following:
+
+WOW-ACCESS-KEY: APIKey in string format, contact us for issuance
+
+WOW-ACCESS-SIGN: Signature, use HMAC SHA256 hash function to obtain hash value, then use Base-64 encoding
+
+WOW-ACCESS-TIMESTAMP: String type timestamp
+
+Signature method: base64(HmacSHA256(timestamp + method))
+
+Note: (1) "+" represents string concatenation (2) timestamp: same as the value in the WOW-ACCESS-TIMESTAMP header (3) method: GET, POST (uppercase)
 
 Special instructions:   
 Large numbers and floating-point numbers are passed as strings in the returned JSON to avoid losing precision during the transfer process
@@ -44,7 +56,7 @@ Large numbers and floating-point numbers are passed as strings in the returned J
 **Request data Type** : `application/json`
 
 
-**Response data Type** : `application/json`
+**Response Content-Type** : `application/json`
 
 
 **Interface Description** : 
@@ -122,7 +134,7 @@ The 'type' field is an order type, allowing 2 values
 **Request Method** :<code class="method_get">GET</code>
 
 
-**Response data Type** : `application/json`
+**Response Content-Type** : `application/json`
 
 
 **Interface Description** : 
@@ -200,7 +212,7 @@ unavailable
 **Request Method** :<code class="method_get">GET</code>
 
 
-**Response data Type** : `application/json`
+**Response Content-Type** : `application/json`
 
 
 **Interface Description** : 
@@ -254,7 +266,7 @@ Obtain the real-time price of the specified Symbol, and the response 'data' of t
 **Request Method** :<code class="method_get">GET</code>
 
 
-**Response data Type** : `application/json`
+**Response Content-Type** : `application/json`
 
 
 **Interface Description** : 
@@ -288,14 +300,14 @@ Obtain the real-time price of the specified Symbol, and the response 'data' of t
 |&emsp;&emsp;s|Symbol|string||
 |&emsp;&emsp;i|Interval|string||
 |&emsp;&emsp;dd||object| |
-|&emsp;&emsp;&emsp;&emsp;o|Start price|string||
-|&emsp;&emsp;&emsp;&emsp;h|High price|string||
-|&emsp;&emsp;&emsp;&emsp;l|Low price|string||
-|&emsp;&emsp;&emsp;&emsp;c|End price|string||
-|&emsp;&emsp;&emsp;&emsp;h24|High price of 24h|string||
-|&emsp;&emsp;&emsp;&emsp;l24|Low price of 24h|string||
-|&emsp;&emsp;&emsp;&emsp;v24|Trading volume in the past 24 hours|string||
-|&emsp;&emsp;&emsp;&emsp;vv24|Transaction volume in the past 24 hours|string||
+|&emsp;&emsp;&emsp;&emsp;o|opening price|string||
+|&emsp;&emsp;&emsp;&emsp;h|highest price|string||
+|&emsp;&emsp;&emsp;&emsp;l|lowest price|string||
+|&emsp;&emsp;&emsp;&emsp;c|closing price|string||
+|&emsp;&emsp;&emsp;&emsp;h24|highest price of 24h|string||
+|&emsp;&emsp;&emsp;&emsp;l24|lowest price of 24h|string||
+|&emsp;&emsp;&emsp;&emsp;v24|Symbol left volume in the past 24 hours|string||
+|&emsp;&emsp;&emsp;&emsp;vv24|Symbol right volume in the past 24 hours|string||
 |&emsp;&emsp;&emsp;&emsp;p24|24-hour price change ratio|string||
 |&emsp;&emsp;&emsp;&emsp;cp|24-hour price fluctuation volume|string||
 |&emsp;&emsp;&emsp;&emsp;v|Volume|string||
@@ -335,13 +347,97 @@ Obtain the real-time price of the specified Symbol, and the response 'data' of t
 ```
 
 
-## 6. Obtain the latest transaction information for transaction pairs
+
+
+
+
+## 6. Get Historical K-Line
+
+
+**Interface Address**:`/gateway-api/spot/open-api/v1/k-line/history/{symbol}/{interval}`
+
+
+**Request Method** :<code class="method_get">GET</code>
+
+
+**Response Content-Type** : `application/json`
+
+
+**Interface Description** : 
+
+
+
+**Request Parameters** : 
+
+|Parameter Name | Parameter Description | Request Type | Required | data Type | Schema|
+| -------- | -------- | ----- | -------- | -------- | ------ |
+|symbol | Symbol, format: BTC-USDT | path | true | string||
+|interval | K-line interval, available: M1, M5, M15, M30, H1, H4, D1, W1, MON1 | path | true | string||
+|endTime|Time of last data, in seconds (results do not include this time data)|query|true|long||
+|limit|Returns the number of records, default 100|query|true|int||
+
+
+**Response Status** : 
+
+
+|Status code | Description | Schema|
+| -------- | -------- | ----- | 
+|200|OK| |
+
+
+**Response parameters** : 
+
+
+|Parameter Name | Parameter Description | Type | Schema|
+| -------- | -------- | ----- |----- | 
+|code||int|int|
+|msg||string||
+|data||object| |
+|&emsp;&emsp;klines|K-Line Historical Data|array| |
+|&emsp;&emsp;&emsp;&emsp;close|closing price|number||
+|&emsp;&emsp;&emsp;&emsp;high|highest price|number||
+|&emsp;&emsp;&emsp;&emsp;low|lowest price|number||
+|&emsp;&emsp;&emsp;&emsp;open|opening price|number||
+|&emsp;&emsp;&emsp;&emsp;time|k-line time in milliseconds|string||
+|&emsp;&emsp;&emsp;&emsp;volume|symbol left volume|number||
+|&emsp;&emsp;&emsp;&emsp;vvolume|symbol right volume|number||
+
+
+**Response Example** :  
+```javascript
+{
+    "code": 0,
+    "msg": "",
+    "data": {
+        "klines": [
+            {
+                "close": 0,
+                "high": 0,
+                "low": 0,
+                "open": 0,
+                "time": "",
+                "volume": 0,
+                "vvolume": 0
+            }
+        ]
+    }
+}
+```
+
+
+
+
+
+
+
+
+## 7. Obtain the latest transaction information for transaction pairs
 
 **Interface Address** : `/spot/open-api/v1/exchange/{symbol}/recent-trades`
 
 **Request Method** :<code class="method_get">GET</code>
 
-**Response data Type** : `application/json`
+**Response Content-Type** : `application/json`
 
 **Interface Description** : 
 
@@ -399,7 +495,7 @@ Obtain the real-time price of the specified Symbol, and the response 'data' of t
 ```
 
 
-## 7. Obtain real-time partial
+## 8. Obtain real-time partial
 
 
 **Interface Address** : `/spot/open-api/v1/exchange/{symbol}/partial`
@@ -407,7 +503,7 @@ Obtain the real-time price of the specified Symbol, and the response 'data' of t
 
 **Request Method** :<code class="method_get">GET</code>
 
-**Response data Type** : `application/json`
+**Response Content-Type** : `application/json`
 
 **Interface Description** : 
 
@@ -473,3 +569,273 @@ Obtain buy and sell data for a specified Symbol, with a maximum number of 'depth
 }
 ```
 
+
+
+
+
+
+
+## 9. Paging to get a list of orders in progress
+
+
+**Interface Address**: `/spot/open-api/v1/exchange/orders`
+
+
+**Request Method** : <code class="method_get">GET</code>
+
+
+**Response Content-Type**: `application/json`
+
+
+**Interface Description**:
+
+This interface does not return the `detail` field value.
+
+**Request Parameters** : 
+
+|Parameter Name | Parameter Description | Request Type | Required | data Type | Schema|
+| -------- | -------- | ----- | -------- | -------- | ------ |
+|status|Order Status, 0:Transaction in progress; 1:Completed|query|true|int||
+|page|Page number, from 0|query|false|int||
+|pageSize|Records per page|query|false|int||
+
+
+**Response Status** : 
+
+
+|Status code | Description | Schema|
+| -------- | -------- | ----- | 
+|200|OK| |
+
+
+
+**Response parameters** : 
+
+
+|Parameter Name | Parameter Description | Type | Schema|
+| -------- | -------- | ----- |----- | 
+|code||int|int|
+|msg||string||
+|data||object||
+|&emsp;&emsp;count|Number of records|int||
+|&emsp;&emsp;total|Total number of records|long||
+|&emsp;&emsp;page|Page number, from 0|int||
+|&emsp;&emsp;pageSize|Records per page|int||
+|&emsp;&emsp;list||array| |
+|&emsp;&emsp;&emsp;orderId|Order ID|string||
+|&emsp;&emsp;&emsp;memberId|User ID|integer||
+|&emsp;&emsp;&emsp;type|Order type, available:MARKET_PRICE,LIMIT_PRICE|string||
+|&emsp;&emsp;&emsp;amount|amount|number||
+|&emsp;&emsp;&emsp;symbol|symbol|string||
+|&emsp;&emsp;&emsp;tradedAmount|Amount of transactions completed|number||
+|&emsp;&emsp;&emsp;turnover|total amount|number||
+|&emsp;&emsp;&emsp;coinSymbol|token|string||
+|&emsp;&emsp;&emsp;baseSymbol|base token|string||
+|&emsp;&emsp;&emsp;status|Order status, available:TRADING,COMPLETED,CANCELED,OVERTIMED|string||
+|&emsp;&emsp;&emsp;direction|Order direction, available:BUY,SELL|string||
+|&emsp;&emsp;&emsp;price|price|number||
+|&emsp;&emsp;&emsp;time|Time to order|integer||
+|&emsp;&emsp;&emsp;completedTime|Completion time|integer||
+|&emsp;&emsp;&emsp;canceledTime|Cancellation time|integer||
+|&emsp;&emsp;&emsp;useDiscount|discount|string||
+|&emsp;&emsp;&emsp;detail|Transacted List|array||
+|&emsp;&emsp;&emsp;completed|Whether to complete, true: complete, false: other cases|boolean||
+
+
+**Response Example** : 
+
+```javascript
+{
+    "code": 0,
+    "msg": "",
+    "data": {
+        "count": 0,
+        "total": 0,
+        "page": 0,
+        "pageSize": 0,
+        "list": [
+            {
+                "orderId": "",
+                "memberId": 0,
+                "type": "",
+                "amount": 0,
+                "symbol": "",
+                "tradedAmount": 0,
+                "turnover": 0,
+                "coinSymbol": "",
+                "baseSymbol": "",
+                "status": "",
+                "direction": "",
+                "price": 0,
+                "time": 0,
+                "completedTime": 0,
+                "canceledTime": 0,
+                "useDiscount": "",
+                "detail": null,
+                "completed": true
+            }
+        ]
+    }
+}
+```
+
+
+## 10. Get order information based on order ID
+
+
+**Interface Address**: `/spot/open-api/v1/exchange/order/{orderId}`
+
+
+**Request Method** : <code class="method_get">GET</code>
+
+
+**Response Content-Type**: `application/json`
+
+
+**Interface Description**:
+
+This interface response contains the `detail` list
+
+**Request Parameters** : 
+
+|Parameter Name | Parameter Description | Request Type | Required | data Type | Schema|
+| -------- | -------- | ----- | -------- | -------- | ------ |
+|orderId|Order ID|path|true|string||
+
+
+**Response Status** : 
+
+
+|Status code | Description | Schema|
+| -------- | -------- | ----- | 
+|200|OK| |
+
+
+
+**Response parameters** : 
+
+
+|Parameter Name | Parameter Description | Type | Schema|
+| -------- | -------- | ----- |----- | 
+|code||int|int|
+|msg||string||
+|data|| object | |
+|&emsp;&emsp;&emsp;orderId|Order ID|string||
+|&emsp;&emsp;&emsp;memberId|User ID|integer||
+|&emsp;&emsp;&emsp;type|Order type, available:MARKET_PRICE,LIMIT_PRICE|string||
+|&emsp;&emsp;&emsp;amount|amount|number||
+|&emsp;&emsp;&emsp;symbol|symbol|string||
+|&emsp;&emsp;&emsp;tradedAmount|Amount of transactions completed|number||
+|&emsp;&emsp;&emsp;turnover|total amount|number||
+|&emsp;&emsp;&emsp;coinSymbol|token|string||
+|&emsp;&emsp;&emsp;baseSymbol|base token|string||
+|&emsp;&emsp;&emsp;status|Order status, available:TRADING,COMPLETED,CANCELED,OVERTIMED|string||
+|&emsp;&emsp;&emsp;direction|Order direction, available:BUY,SELL|string||
+|&emsp;&emsp;&emsp;price|price|number||
+|&emsp;&emsp;&emsp;time|Time to order|integer||
+|&emsp;&emsp;&emsp;completedTime|Completion time|integer||
+|&emsp;&emsp;&emsp;canceledTime|Cancellation time|integer||
+|&emsp;&emsp;&emsp;useDiscount|discount|string||
+|&emsp;&emsp;&emsp;detail|Transacted List|array||
+|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;id|Transaction ID|integer||
+|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;orderId|Order ID|string||
+|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;price|price|number||
+|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;amount|amount|number||
+|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;turnover|turnover|number||
+|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fee|fee|number||
+|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;time|Date of transaction|integer||
+|&emsp;&emsp;&emsp;completed|Whether to complete, true: complete, false: other cases|boolean||
+
+
+
+**Response Example** : 
+
+```javascript
+{
+    "code": 0,
+    "msg": "",
+    "data": {
+        "orderId": "",
+        "memberId": 0,
+        "type": "",
+        "amount": 0,
+        "symbol": "",
+        "tradedAmount": 0,
+        "turnover": 0,
+        "coinSymbol": "",
+        "baseSymbol": "",
+        "status": "",
+        "direction": "",
+        "price": 0,
+        "time": 0,
+        "completedTime": 0,
+        "canceledTime": 0,
+        "useDiscount": "",
+        "detail": [
+            {
+                "id": 0,
+                "orderId": "",
+                "price": 0,
+                "amount": 0,
+                "turnover": 0,
+                "fee": 0,
+                "time": 0
+            }
+        ],
+        "completed": true
+    }
+}
+```
+
+
+## 11. Cancel an order
+
+
+**Interface Address**: `/spot/open-api/v1/exchange/order/{orderId}`
+
+
+**Request Method**: <code class="method_delete">DELETE</code>
+
+
+**Response Content-Type**: `application/json`
+
+
+**Interface Description**:
+
+
+
+**Request Parameters** : 
+
+|Parameter Name | Parameter Description | Request Type | Required | data Type | Schema|
+| -------- | -------- | ----- | -------- | -------- | ------ |
+|orderId|Order ID|path|true|string||
+
+
+**Response Status** : 
+
+
+|Status code | Description | Schema|
+| -------- | -------- | ----- | 
+|200|OK| |
+
+
+
+**Response parameters** : 
+
+
+|Parameter Name | Parameter Description | Type | Schema|
+| -------- | -------- | ----- |----- | 
+|code||int|int|
+|msg||string||
+|data|true:Processing success,false:Processing failure|boolean||
+
+
+**Response Example** : 
+
+```javascript
+{
+    "code": 0,
+    "msg": "",
+    "data": true
+}
+```
