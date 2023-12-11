@@ -3,15 +3,12 @@
 
 [中文文档](./README_zh.html),  [English API doc](./)
 
-## 1.通用说明
-
-
-
+## 1. 通用说明
 
 该文档列出的接口除明确说明,均需要登录才可以访问,请联系我们下发token以供访问.  
 
 连接信息如下:  
-Host: `https://wowexchange.xyz/gateway-api`
+Host: `https://wowexchange.xyz/gateway-open-api`
 
 验证方式:  
 验证信息存放在请求头中. 名称(key)为 `token`, 值为获取到的token.
@@ -30,13 +27,25 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N......6AJ" "https://wowexchange.xyz/g
 }
 ```
 
+**所有请求头都必须包含以下内容**
+
+WOW-ACCESS-KEY：字符串类型的APIKey，联系我们下发
+
+WOW-ACCESS-SIGN：签名，使用HMAC SHA256哈希函数获得哈希值，再使用Base-64编码
+
+WOW-ACCESS-TIMESTAMP：字符串类型的时间戳
+
+**签名方法**：base64(HmacSHA256(timestamp + method))
+
+注意：（1）+号代表字符串拼接 （2）timestamp：与请求头WOW-ACCESS-TIMESTAMP相同 (3)method：GET、POST（大写）
+
 特别说明:  
 大数字和浮点数在返回的json中使用字符串的形式传递是为了避免数字在传递过程中丢失精度.
 
 
 
 
-## 2.现货下单接口
+## 2. 现货下单接口
 
 
 **接口地址**: `/spot/open-api/v1/exchange/order`
@@ -48,7 +57,7 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N......6AJ" "https://wowexchange.xyz/g
 **请求数据类型**: `application/json`
 
 
-**响应数据类型**: `application/json`
+**响应 Content-Type**: `application/json`
 
 
 **接口描述**:
@@ -118,7 +127,7 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N......6AJ" "https://wowexchange.xyz/g
 ```
 
 
-## 3.获取钱包账户列表
+## 3. 获取钱包账户列表
 
 
 **接口地址**: `/spot/open-api/v1/wallets`
@@ -127,7 +136,7 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N......6AJ" "https://wowexchange.xyz/g
 **请求方式**: <code class="method_get" style="">GET</code>
 
 
-**响应数据类型**: `application/json`
+**响应 Content-Type**: `application/json`
 
 
 **接口描述**:
@@ -201,7 +210,7 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N......6AJ" "https://wowexchange.xyz/g
 ```
 
 
-## 4.获取交易对最新价格
+## 4. 获取交易对最新价格
 
 
 **接口地址**: `/spot/open-api/v1/last-price/{symbol}`
@@ -210,7 +219,7 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N......6AJ" "https://wowexchange.xyz/g
 **请求方式**: <code class="method_get" style="">GET</code>
 
 
-**响应数据类型**: `application/json`
+**响应 Content-Type**: `application/json`
 
 
 **接口描述**:
@@ -258,7 +267,7 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N......6AJ" "https://wowexchange.xyz/g
 ```
 
 
-## 5.获取实时K线数据
+## 5. 获取实时K线数据
 
 
 **接口地址**: `/spot/open-api/v1/k-line/{symbol}/{interval}`
@@ -267,7 +276,7 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N......6AJ" "https://wowexchange.xyz/g
 **请求方式**: <code class="method_get" style="">GET</code>
 
 
-**响应数据类型**: `application/json`
+**响应 Content-Type**: `application/json`
 
 
 **接口描述**:
@@ -300,7 +309,7 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N......6AJ" "https://wowexchange.xyz/g
 
 | 参数名称 | 参数说明 | 类型 | schema |
 | -------- | -------- | ----- |----- | 
-|code||integer(int32)|integer(int32)|
+|code||int|int|
 |msg||string||
 |data||KlineSubscribeData|KlineSubscribeData|
 |&emsp;&emsp;s|交易对|string||
@@ -326,34 +335,120 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N......6AJ" "https://wowexchange.xyz/g
 **响应示例**:
 ```json
 {
-	"code": 0,
-	"msg": "",
-	"data": {
-		"s": "",
-		"i": "",
-		"dd": {
-			"o": "",
-			"h": "",
-			"l": "",
-			"c": "",
-			"h24": "",
-			"l24": "",
-			"v24": "",
-			"vv24": "",
-			"p24": "",
-			"cp": "",
-			"v": "",
-			"vv": "",
-			"pt": 0,
-			"sse": "",
-			"sos": ""
-		}
-	}
+    "code": 0,
+    "msg": "",
+    "data": {
+        "s": "",
+        "i": "",
+        "dd": {
+            "o": "",
+            "h": "",
+            "l": "",
+            "c": "",
+            "h24": "",
+            "l24": "",
+            "v24": "",
+            "vv24": "",
+            "p24": "",
+            "cp": "",
+            "v": "",
+            "vv": "",
+            "pt": 0,
+            "sse": "",
+            "sos": ""
+        }
+    }
 }
 ```
 
 
-## 6.获取交易对最新交易信息
+
+
+
+## 6. 获取历史K线
+
+
+**接口地址**:`/gateway-api/spot/open-api/v1/k-line/history/{symbol}/{interval}`
+
+
+**请求方式**:`GET`
+
+
+**请求数据类型**:`application/x-www-form-urlencoded`
+
+
+**响应数据类型**:`*/*`
+
+
+**接口描述**:
+
+
+**请求参数**:
+
+
+| 参数名称 | 参数说明 | 请求类型    | 是否必须 | 数据类型 | schema |
+| -------- | -------- | ----- | -------- | -------- | ------ |
+|symbol|交易对, 格式：BTC-USDT|path|true|string||
+|interval|K线间隔, 可用值: M1,M5,M15,M30,H1,H4,D1,W1,MON1|path|true|string||
+|endTime|最后一个数据时间,单位:秒(结果不包含此时间数据)|query|true|long||
+|limit|返回记录数量,默认100|query|true|int||
+
+
+**响应状态**:
+
+
+| 状态码 | 说明 | schema |
+| -------- | -------- | ----- | 
+|200|OK| |
+
+
+**响应参数**:
+
+
+| 参数名称 | 参数说明 | 类型 | schema |
+| -------- | -------- | ----- |----- | 
+|code||int|int|
+|msg||string||
+|data||object| |
+|&emsp;&emsp;klines|K线历史数据|array| |
+|&emsp;&emsp;&emsp;&emsp;close|结束价|number||
+|&emsp;&emsp;&emsp;&emsp;high|最高价|number||
+|&emsp;&emsp;&emsp;&emsp;low|最低价|number||
+|&emsp;&emsp;&emsp;&emsp;open|开始价|number||
+|&emsp;&emsp;&emsp;&emsp;time|k线时间,单位毫秒|string||
+|&emsp;&emsp;&emsp;&emsp;volume|成交量,交易对左边成交量|number||
+|&emsp;&emsp;&emsp;&emsp;vvolume|成交额,交易对右边成交量|number||
+
+
+**响应示例**:
+```javascript
+{
+    "code": 0,
+    "msg": "",
+    "data": {
+        "klines": [
+            {
+                "close": 0,
+                "high": 0,
+                "low": 0,
+                "open": 0,
+                "time": "",
+                "volume": 0,
+                "vvolume": 0
+            }
+        ]
+    }
+}
+```
+
+
+
+
+
+
+
+
+## 7. 获取交易对最新交易信息
 
 
 **接口地址**: `/spot/open-api/v1/exchange/{symbol}/recent-trades`
@@ -362,7 +457,7 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N......6AJ" "https://wowexchange.xyz/g
 **请求方式**: <code class="method_get" style="">GET</code>
 
 
-**响应数据类型**: `application/json`
+**响应 Content-Type**: `application/json`
 
 
 **接口描述**:
@@ -428,7 +523,7 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N......6AJ" "https://wowexchange.xyz/g
 ```
 
 
-## 7.获取实时盘口数据
+## 8. 获取实时盘口数据
 
 
 **接口地址**: `/spot/open-api/v1/exchange/{symbol}/partial`
@@ -437,7 +532,7 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N......6AJ" "https://wowexchange.xyz/g
 **请求方式**: <code class="method_get" style="">GET</code>
 
 
-**响应数据类型**: `application/json`
+**响应 Content-Type**: `application/json`
 
 
 **接口描述**:
@@ -474,7 +569,7 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N......6AJ" "https://wowexchange.xyz/g
 |msg||string||
 |data||object| |
 |&emsp;&emsp;s|交易对|string||
-|&emsp;&emsp;a|买盘|array| |
+|&emsp;&emsp;a|卖盘|array| |
 |&emsp;&emsp;&emsp;&emsp;p|价格|number||
 |&emsp;&emsp;&emsp;&emsp;a|数量|number||
 |&emsp;&emsp;&emsp;&emsp;t|总额|number||
@@ -507,5 +602,270 @@ curl -X GET -H  "Accept:*/*" -H  "token:S0N......6AJ" "https://wowexchange.xyz/g
             }
         ]
     }
+}
+```
+
+
+
+
+
+## 9. 分页获取进行中的订单列表
+
+
+**接口地址**: `/spot/open-api/v1/exchange/orders`
+
+
+**请求方式**: <code class="method_get">GET</code>
+
+
+**响应 Content-Type**: `application/json`
+
+
+**接口描述**:
+
+本接口不返回 `detail` 字段值
+
+**请求参数**:
+
+
+| 参数名称 | 参数说明 | 请求类型    | 是否必须 | 数据类型 | schema |
+| -------- | -------- | ----- | -------- | -------- | ------ |
+|status|订单状态 0-交易中 1-已完成|query|true|int||
+|page|页码, 从0开始|query|false|int||
+|pageSize|每页记录数|query|false|int||
+
+
+**响应状态**:
+
+
+| 状态码 | 说明 | schema |
+| -------- | -------- | ----- | 
+|200|OK| |
+
+
+**响应参数**:
+
+
+| 参数名称 | 参数说明 | 类型 | schema |
+| -------- | -------- | ----- |----- | 
+|code||int|int|
+|msg||string||
+|data||object||
+|&emsp;&emsp;count|本页记录数|int||
+|&emsp;&emsp;total|总记录数|long||
+|&emsp;&emsp;page|页码,0开始|int||
+|&emsp;&emsp;pageSize|每页最大记录数|int||
+|&emsp;&emsp;list||array|ExchangeOrder|
+|&emsp;&emsp;&emsp;orderId||string||
+|&emsp;&emsp;&emsp;memberId|所属用户ID|integer||
+|&emsp;&emsp;&emsp;type|订单类型,可用值:MARKET_PRICE,LIMIT_PRICE|string||
+|&emsp;&emsp;&emsp;amount|数量|number||
+|&emsp;&emsp;&emsp;symbol|交易对|string||
+|&emsp;&emsp;&emsp;tradedAmount|已交易数量|number||
+|&emsp;&emsp;&emsp;turnover|总额|number||
+|&emsp;&emsp;&emsp;coinSymbol|币|string||
+|&emsp;&emsp;&emsp;baseSymbol|本位币|string||
+|&emsp;&emsp;&emsp;status|订单状态,可用值:TRADING,COMPLETED,CANCELED,OVERTIMED|string||
+|&emsp;&emsp;&emsp;direction|订单方向,可用值:BUY,SELL|string||
+|&emsp;&emsp;&emsp;price|价格|number||
+|&emsp;&emsp;&emsp;time|下单时间|integer||
+|&emsp;&emsp;&emsp;completedTime|完成时间|integer||
+|&emsp;&emsp;&emsp;canceledTime|取消时间|integer||
+|&emsp;&emsp;&emsp;useDiscount|折扣|string||
+|&emsp;&emsp;&emsp;detail|已成交列表|array||
+|&emsp;&emsp;&emsp;completed|是否完成,true:完成,false:未完成|boolean||
+
+
+**响应示例**:
+```javascript
+{
+    "code": 0,
+    "msg": "",
+    "data": {
+        "count": 0,
+        "total": 0,
+        "page": 0,
+        "pageSize": 0,
+        "list": [
+            {
+                "orderId": "",
+                "memberId": 0,
+                "type": "",
+                "amount": 0,
+                "symbol": "",
+                "tradedAmount": 0,
+                "turnover": 0,
+                "coinSymbol": "",
+                "baseSymbol": "",
+                "status": "",
+                "direction": "",
+                "price": 0,
+                "time": 0,
+                "completedTime": 0,
+                "canceledTime": 0,
+                "useDiscount": "",
+                "detail": null,
+                "completed": true
+            }
+        ]
+    }
+}
+```
+
+
+## 10. 根据订单ID获取订单信息
+
+
+**接口地址**: `/spot/open-api/v1/exchange/order/{orderId}`
+
+
+**请求方式**: <code class="method_get">GET</code>
+
+
+**响应 Content-Type**: `application/json`
+
+
+**接口描述**:
+
+此接口响应包含 `detail` 列表
+
+**请求参数**:
+
+
+| 参数名称 | 参数说明 | 请求类型    | 是否必须 | 数据类型 | schema |
+| -------- | -------- | ----- | -------- | -------- | ------ |
+|orderId|订单ID|path|true|string||
+
+
+**响应状态**:
+
+
+| 状态码 | 说明 | schema |
+| -------- | -------- | ----- | 
+|200|OK| |
+
+
+**响应参数**:
+
+
+| 参数名称 | 参数说明 | 类型 | schema |
+| -------- | -------- | ----- |----- | 
+|code||int|int|
+|msg||string||
+|data|| object | |
+|&emsp;&emsp;orderId|订单ID|string||
+|&emsp;&emsp;memberId|所属用户ID|long||
+|&emsp;&emsp;type|订单类型,可用值:MARKET_PRICE,LIMIT_PRICE|string||
+|&emsp;&emsp;amount|数量|number||
+|&emsp;&emsp;symbol|币对|string||
+|&emsp;&emsp;tradedAmount|已成交数量|number||
+|&emsp;&emsp;turnover|总额|number||
+|&emsp;&emsp;coinSymbol|币|string||
+|&emsp;&emsp;baseSymbol|本位币|string||
+|&emsp;&emsp;status|订单状态,可用值:TRADING,COMPLETED,CANCELED,OVERTIMED|string||
+|&emsp;&emsp;direction|订单方向,可用值:BUY,SELL|string||
+|&emsp;&emsp;price|价格|number||
+|&emsp;&emsp;time|下单时间|long||
+|&emsp;&emsp;completedTime|完成时间|long||
+|&emsp;&emsp;canceledTime|取消时间|long||
+|&emsp;&emsp;useDiscount|折扣|string||
+|&emsp;&emsp;detail|已成交列表|array|ExchangeOrderDetail|
+|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;id|成交ID|integer||
+|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;orderId|所属订单号|string||
+|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;price|成交价格|number||
+|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;amount|成交数量|number||
+|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;turnover|成交总额|number||
+|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fee|手续费|number||
+|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;time|成交时间|integer||
+|&emsp;&emsp;completed|是否完成, true:完成, false:未完成|boolean||
+
+
+**响应示例**:
+```javascript
+{
+    "code": 0,
+    "msg": "",
+    "data": {
+        "orderId": "",
+        "memberId": 0,
+        "type": "",
+        "amount": 0,
+        "symbol": "",
+        "tradedAmount": 0,
+        "turnover": 0,
+        "coinSymbol": "",
+        "baseSymbol": "",
+        "status": "",
+        "direction": "",
+        "price": 0,
+        "time": 0,
+        "completedTime": 0,
+        "canceledTime": 0,
+        "useDiscount": "",
+        "detail": [
+            {
+                "id": 0,
+                "orderId": "",
+                "price": 0,
+                "amount": 0,
+                "turnover": 0,
+                "fee": 0,
+                "time": 0
+            }
+        ],
+        "completed": true
+    }
+}
+```
+
+
+## 11. 撤单
+
+
+**接口地址**: `/spot/open-api/v1/exchange/order/{orderId}`
+
+
+**请求方式**: <code class="method_delete">DELETE</code>
+
+
+**响应 Content-Type**: `application/json`
+
+
+**接口描述**:
+
+
+
+**请求参数**:
+
+
+| 参数名称 | 参数说明 | 请求类型    | 是否必须 | 数据类型 | schema |
+| -------- | -------- | ----- | -------- | -------- | ------ |
+|orderId|订单ID|path|true|string||
+
+
+**响应状态**:
+
+
+| 状态码 | 说明 | schema |
+| -------- | -------- | ----- | 
+|200|OK| |
+
+
+**响应参数**:
+
+
+| 参数名称 | 参数说明 | 类型 | schema |
+| -------- | -------- | ----- |----- | 
+|code||int|int|
+|msg||string||
+|data|true:撤单成功,false:处理失败|boolean||
+
+
+**响应示例**:
+```javascript
+{
+    "code": 0,
+    "msg": "",
+    "data": true
 }
 ```
